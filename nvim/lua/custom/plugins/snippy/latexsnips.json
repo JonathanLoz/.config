@@ -1,0 +1,16 @@
+{
+	"doubleIntegral": {
+		"prefix": "dint",
+		"body": [
+			"\\int_{${1:a}}^{${2:b}} \\int_{${3:c}}^{${4:d}} ${5:expression}\\,d${6:x}\\,d${7:y}$0"
+		],
+		"description": "Expands to a nested double integral with editable limits, integrand, and differential variables"
+	},
+	"tripleIntegral": {
+		"prefix": "tint",
+		"body": [
+			"\\int_{${1:a}}^{${2:b}} \\int_{${3:c}}^{${4:d}} \\int_{${5:e}}^{${6:f}} ${7:expression}\\,d${8:x}\\,d${9:y}\\,d${10:z}$0"
+		],
+		"description": "Expands to a nested triple integral with editable limits, integrand, and differential variables"
+	}
+}
