@@ -117,12 +117,27 @@ return {
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
-			clangd = { { capabilities = capabilities } },
+			clangd = { capabilities = capabilities },
 			-- gopls = {},
-			pyright = { capabilities = { capabilities }, filetypes = { "python" } },
+			pyright = {
+				capabilities = capabilities,
+				filetypes = { "python" },
+				settings = {
+					python = {
+						inlayHints = {
+							variableTypes = true,
+							functionReturnTypes = true,
+							parameterNames = {
+								enabled = "all", -- show `param:` inline
+								suppressWhenArgumentMatchesName = false,
+							},
+						},
+					},
+				},
+			},
 			julials = { capabilities = { capabilities }, filetypes = { "julia" } },
 			jsonls = { capabilities = { capabilities }, filetypes = { "json" } },
-			texlab = { capabilities = { capabilities }, filetypes = { "tex","bib" } },
+			texlab = { capabilities = { capabilities }, filetypes = { "tex", "bib" } },
 			-- rust_analyzer = {},
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			--
