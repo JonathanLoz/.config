@@ -1,6 +1,6 @@
 return {
 	"rebelot/kanagawa.nvim",
-	priority = 1000,
+	riority = 1000,
 	cond = vim.g.setup.colorscheme == "kanagawa",
 	config = function()
 		require("kanagawa").setup({
