@@ -59,15 +59,7 @@ map("n", "<leader>sr", builtin.resume, "[S]earch [R]esume")
 map("n", "<leader>s.", builtin.oldfiles, '[S]earch Recent Files ("." for repeat)')
 map("n", "<leader><leader>", builtin.buffers, "[ ] Find existing buffers")
 
-local zettelkasten_directory = vim.fn.expand(setup.obsidian_dirs.generalpath)
-vim.keymap.set("n", "<leader>zt", function()
-	builtin.live_grep({ cwd = zettelkasten_directory })
-end, { desc = "Search [Z]ettelkasten [T]ext." })
-vim.keymap.set("n", "<leader>zf", function()
-	builtin.find_files({ cwd = zettelkasten_directory })
-end, { desc = "Search [Z]ettelkasten [F]iles." })
--- TODO: exclude /daily from search
---
+
 vim.keymap.set("n", "<leader>fl", function()
 	local word = vim.fn.input("Search in current line: ")
 	local line_number = vim.fn.line(".")

@@ -2,7 +2,7 @@ local setup = require("setup")
 return {
 	"nvim-telescope/telescope.nvim",
 	event = "VimEnter",
-	branch = "0.1.x",
+	version = false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{

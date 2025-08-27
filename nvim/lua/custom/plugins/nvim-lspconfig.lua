@@ -55,6 +55,8 @@ return {
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
+				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+
 				-- WARN: This is not Goto Definition, this is Goto Declaration.
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -117,7 +119,7 @@ return {
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
-			clangd = { capabilities = capabilities },
+			clangd = { capabilities = capabilities }, -- FIX: Was { { capabilities = capabilities } }
 			-- gopls = {},
 			pyright = {
 				capabilities = capabilities,
@@ -135,9 +137,10 @@ return {
 					},
 				},
 			},
-			julials = { capabilities = { capabilities }, filetypes = { "julia" } },
-			jsonls = { capabilities = { capabilities }, filetypes = { "json" } },
-			texlab = { capabilities = { capabilities }, filetypes = { "tex", "bib" } },
+			-- Julia LSP configuration - special handling needed
+			-- Do NOT include julials here, we'll set it up manually below
+			jsonls = { capabilities = capabilities, filetypes = { "json" } }, -- FIX: Was { capabilities }
+			texlab = { capabilities = capabilities, filetypes = { "tex", "bib" } }, -- FIX: Was { capabilities }
 			-- rust_analyzer = {},
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			--
@@ -182,9 +185,98 @@ return {
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 		local lspconfig = require("lspconfig")
+
+		-- Manual Julia LSP setup to work around Mason issues in August 2025
+		-- The Mason wrapper for julials has argument passing problems
+		local function setup_julia_lsp()
+			local julia = vim.fn.exepath("julia")
+			if julia == "" then
+				vim.notify("Julia not found in PATH", vim.log.levels.WARN)
+				return
+			end
+
+			-- Use direct Julia command instead of Mason wrapper
+			lspconfig.julials.setup({
+				cmd = {
+					julia,
+					"--startup-file=no",
+					"--history-file=no",
+					"-e",
+					[[
+					using Pkg
+					# Try to use the LanguageServer from Mason installation
+					ls_install_path = joinpath(
+						homedir(),
+						".local", "share", "nvim", "mason", "packages", "julia-lsp", "libexec"
+					)
+					if isdir(ls_install_path)
+						pushfirst!(LOAD_PATH, ls_install_path)
+					end
+					using LanguageServer
+					popfirst!(LOAD_PATH)
+					depot_path = get(ENV, "JULIA_DEPOT_PATH", "")
+					project_path = dirname(something(
+						Base.current_project(),
+						Pkg.Types.Context().env.project_file,
+						Base.active_project()
+					))
+					server = LanguageServer.LanguageServerInstance(stdin, stdout, project_path, depot_path)
+					server.runlinter = true
+					run(server)
+					]],
+				},
+				capabilities = capabilities,
+				filetypes = { "julia" },
+				root_dir = lspconfig.util.root_pattern("Project.toml", "JuliaProject.toml", "Manifest.toml", ".git"),
+				single_file_support = true,
+				on_attach = function(client, bufnr)
+					-- Enable diagnostics
+					vim.diagnostic.config({
+						virtual_text = true,
+						signs = true,
+						underline = true,
+						update_in_insert = false,
+						severity_sort = true,
+					})
+				end,
+				settings = {
+					julia = {
+						lint = {
+							run = true, -- Enable linting
+							missingrefs = "all", -- Check for missing references
+							call = true, -- Check function calls
+							iter = true, -- Check iterations
+							nothingcomp = true, -- Check nothing comparisons
+							constif = true, -- Check constant conditions
+						},
+						inlayHints = {
+							static = {
+								enabled = true,
+								variableTypes = {
+									enabled = true,
+								},
+							},
+							parameterNames = {
+								enabled = "all",
+								suppressWhenArgumentMatchesName = false,
+							},
+						},
+					},
+				},
+			})
+		end
+
+		-- Call the Julia setup
+		setup_julia_lsp()
+
 		require("mason-lspconfig").setup({
 			handlers = {
 				function(server_name)
+					-- Skip julials as we handle it manually above
+					if server_name == "julials" then
+						return
+					end
+
 					if server_name ~= "jdtls" then
 						local server = servers[server_name] or {}
 						-- This handles overriding only values explicitly passed
