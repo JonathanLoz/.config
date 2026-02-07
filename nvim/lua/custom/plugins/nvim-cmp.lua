@@ -31,7 +31,6 @@ return {
 	},
 	config = function()
 		require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/lua/custom/plugins/snippy/" })
-		require("vim-react-snippets").lazy_load()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		luasnip.config.setup({})

@@ -35,10 +35,10 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>", "Clear search highlight")
 map("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit terminal mode")
 -- Window navigation
 -- This depends on Your preferences, I was always using <C-w><C-direction> and have never had any problems with it, therefore I don't need those mappings
- map("n", "<C-h>", "<C-w><C-h>", "Move focus to the left window") 
- map("n", "<C-l>", "<C-w><C-l>", "Move focus to the right window") 
- map("n", "<C-j>", "<C-w><C-j>", "Move focus to the lower window") 
- map("n", "<C-k>", "<C-w><C-k>", "Move focus to the upper window") 
+map("n", "<C-h>", "<C-w><C-h>", "Move focus to the left window")
+map("n", "<C-l>", "<C-w><C-l>", "Move focus to the right window")
+map("n", "<C-j>", "<C-w><C-j>", "Move focus to the lower window")
+map("n", "<C-k>", "<C-w><C-k>", "Move focus to the upper window")
 
 -- Arrow keys hint
 map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>', "Hint: Use h")
@@ -58,7 +58,6 @@ map("n", "<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
 map("n", "<leader>sr", builtin.resume, "[S]earch [R]esume")
 map("n", "<leader>s.", builtin.oldfiles, '[S]earch Recent Files ("." for repeat)')
 map("n", "<leader><leader>", builtin.buffers, "[ ] Find existing buffers")
-
 
 vim.keymap.set("n", "<leader>fl", function()
 	local word = vim.fn.input("Search in current line: ")
@@ -111,3 +110,11 @@ map("n", "<leader>k", [[?^##\+ .*<CR>]], "Go to next markdown header")
 map("n", "<leader>mt", ":Markview hybridToggle<CR>", "[M]arkview [T]oggle Hybrid Mode")
 -- LazyGit - declared in lazygit.lua -  <leader>lg - Opens Lazygit
 -- CodeSnap - declared in codesnap.lua -  <leader>cc - Takes beautiful snapshot of code and saves in clipboard
+-- Compile current TeX file with pdflatex
+vim.api.nvim_create_user_command("TexPdf", function()
+	vim.cmd("!pdflatex -interaction=nonstopmode %")
+end, {})
+
+-- Keymap: <leader>pp to compile TeX
+vim.api.nvim_set_keymap("n", "<leader>pt", ":TeXpresso %<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>pp", ":TexPdf<CR>", { desc = "Compile TeX to PDF" })

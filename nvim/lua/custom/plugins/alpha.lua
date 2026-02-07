@@ -12,7 +12,6 @@ return {
 			no_crop = true,
 			shrink_margin = false,
 		}
-
 		local function get_all_files_in_dir(dir)
 			local files = {}
 			local scan = vim.fn.globpath(dir, "**/*.lua", true, true)
@@ -21,23 +20,18 @@ return {
 			end
 			return files
 		end
-
 		local function load_random_header()
 			math.randomseed(os.time())
 			local header_folder = vim.fn.stdpath("config") .. "/lua/custom/plugins/header_img/"
 			local files = get_all_files_in_dir(header_folder)
-
 			if #files == 0 then
 				return nil
 			end
-
 			local random_file = files[math.random(#files)]
 			local relative_path = random_file:sub(#header_folder + 1)
 			local module_name = "custom.plugins.header_img."
 				.. relative_path:gsub("/", "."):gsub("\\", "."):gsub("%.lua$", "")
-
 			package.loaded[module_name] = nil
-
 			local ok, module = pcall(require, module_name)
 			if ok and module.header then
 				return module.header
@@ -45,8 +39,7 @@ return {
 				return nil
 			end
 		end
-
-		local function change_header()
+		_G.change_alpha_header = function()
 			local new_header = load_random_header()
 			if new_header then
 				dashboard.config.layout[2] = new_header
@@ -55,14 +48,12 @@ return {
 				print("No images inside header_img folder.")
 			end
 		end
-
 		local header = load_random_header()
 		if header then
 			dashboard.config.layout[2] = header
 		else
 			print("No images inside header_img folder.")
 		end
-
 		dashboard.section.tasks = {
 			type = "text",
 			val = utils.get_today_tasks(),
@@ -72,15 +63,11 @@ return {
 				width = 40,
 			},
 		}
-
 		dashboard.section.buttons.val = {
-			dashboard.button("w", "🖌️ Change header image", function()
-				change_header()
-			end),
+			dashboard.button("w", "🖌️ Change header image", ":lua _G.change_alpha_header()<CR>"),
 			dashboard.button("r", "⌛ Recent files", ":Telescope oldfiles <CR>"),
 			dashboard.button("t", "🖮  Practice typing with Typr ", ":Typr<CR>"),
 		}
-
 		dashboard.config.layout = {
 			{ type = "padding", val = 3 },
 			header,
@@ -121,12 +108,11 @@ return {
 				local stats = require("lazy").stats()
 				local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
 				dashboard.section.footer.val =
-					{ " ", " ", " ", " Loaded " .. stats.count .. " plugins  in " .. ms .. " ms " }
+					{ " ", " ", " ", " Loaded " .. stats.count .. " plugins  in " .. ms .. " ms " }
 				dashboard.section.header.opts.hl = "DashboardFooter"
 				pcall(vim.cmd.AlphaRedraw)
 			end,
 		})
-
 		dashboard.opts.opts.noautocmd = true
 		alpha.setup(dashboard.opts)
 	end,
