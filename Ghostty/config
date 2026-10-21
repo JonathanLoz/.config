@@ -1,4 +1,4 @@
-# This is the configuration file for Ghostty.
+hnm # This is the configuration file for Ghostty.
 #
 # This template file has been automatically created at the following
 # path since Ghostty couldn't find any existing config files on your system:
@@ -42,9 +42,9 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme= "Dracula"
+theme= 
 gtk-titlebar=true
 font-size=18
 background-opacity=0.8
 
-custom-shader = ~/.config/Ghostty/shaders/starfield.glsl
+custom-shader = ~/.config/Ghostty/shaders/in-game-crt.glsl

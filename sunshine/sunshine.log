@@ -1,0 +1,100 @@
+[2026-10-17 23:07:56.587]: Info: Sunshine version: 2026.914.233613 commit: 63d35f702ee9e362e43263742981836ec0710384
+[2026-10-17 23:07:56.588]: Info: Package Publisher: LizardByte
+[2026-10-17 23:07:56.588]: Info: Publisher Website: https://app.lizardbyte.dev
+[2026-10-17 23:07:56.588]: Info: Get support: https://app.lizardbyte.dev/support
+[2026-10-17 23:07:56.606]: Info: Currently available display devices:
+[
+  {
+    "device_id": "macos-cg-2dfd8c76c661d8f3",
+    "display_name": "1",
+    "edid": null,
+    "friendly_name": "1",
+    "info": {
+      "hdr_state": null,
+      "origin_point": {
+        "x": 0,
+        "y": 0
+      },
+      "primary": true,
+      "refresh_rate": {
+        "type": "rational",
+        "value": {
+          "denominator": 1,
+          "numerator": 60
+        }
+      },
+      "resolution": {
+        "height": 1912,
+        "width": 2940
+      },
+      "resolution_scale": {
+        "type": "rational",
+        "value": {
+          "denominator": 100,
+          "numerator": 100
+        }
+      }
+    }
+  }
+]
+[2026-10-17 23:07:56.621]: Warning: Gamepad auto is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: Gamepad generic is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: Gamepad x360 is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: Gamepad xone is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: Gamepad xseries is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: Gamepad ds4 is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: Gamepad ds5 is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: Gamepad switch is disabled due to gamepads.virtualhid-not-available
+[2026-10-17 23:07:56.621]: Warning: No gamepad input is available
+[2026-10-17 23:07:56.621]: Info: // Testing for available encoders, this may generate errors. You can safely ignore those errors. //
+[2026-10-17 23:07:56.621]: Info: Trying encoder [videotoolbox]
+[2026-10-17 23:07:56.622]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:56.627]: Info: Creating encoder [h264_videotoolbox]
+[2026-10-17 23:07:56.627]: Info: Color coding: SDR (Rec. 601)
+[2026-10-17 23:07:56.627]: Info: Color depth: 8-bit
+[2026-10-17 23:07:56.627]: Info: Color range: JPEG
+[2026-10-17 23:07:56.630]: Info: Streaming bitrate is 1000000
+[2026-10-17 23:07:56.844]: Warning: [h264_videotoolbox @ 0x74e10a0000] PrioritizeEncodingSpeedOverQuality property is not supported on this device. Ignoring.
+[2026-10-17 23:07:56.845]: Info: [h264_videotoolbox @ 0x74e10a0000] This device does not support the AllowOpenGop option. Value ignored.
+[2026-10-17 23:07:57.327]: Info: Creating encoder [hevc_videotoolbox]
+[2026-10-17 23:07:57.327]: Info: Color coding: SDR (Rec. 601)
+[2026-10-17 23:07:57.327]: Info: Color depth: 8-bit
+[2026-10-17 23:07:57.327]: Info: Color range: JPEG
+[2026-10-17 23:07:57.327]: Info: Streaming bitrate is 1000000
+[2026-10-17 23:07:57.332]: Warning: [hevc_videotoolbox @ 0x74e10a0000] PrioritizeEncodingSpeedOverQuality property is not supported on this device. Ignoring.
+[2026-10-17 23:07:57.332]: Info: [hevc_videotoolbox @ 0x74e10a0000] This device does not support the AllowOpenGop option. Value ignored.
+[2026-10-17 23:07:57.491]: Info: Creating encoder [av1_videotoolbox]
+[2026-10-17 23:07:57.491]: Info: Color coding: SDR (Rec. 601)
+[2026-10-17 23:07:57.491]: Info: Color depth: 8-bit
+[2026-10-17 23:07:57.491]: Info: Color range: JPEG
+[2026-10-17 23:07:57.491]: Error: Couldn't open [av1_videotoolbox]
+[2026-10-17 23:07:57.492]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:57.493]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:57.493]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:57.493]: Info: Creating encoder [hevc_videotoolbox]
+[2026-10-17 23:07:57.493]: Info: Color coding: SDR (Rec. 709)
+[2026-10-17 23:07:57.493]: Info: Color depth: 10-bit
+[2026-10-17 23:07:57.493]: Info: Color range: JPEG
+[2026-10-17 23:07:57.493]: Info: Streaming bitrate is 1000000
+[2026-10-17 23:07:57.494]: Warning: [hevc_videotoolbox @ 0x74e10a0000] PrioritizeEncodingSpeedOverQuality property is not supported on this device. Ignoring.
+[2026-10-17 23:07:57.495]: Info: [hevc_videotoolbox @ 0x74e10a0000] This device does not support the AllowOpenGop option. Value ignored.
+[2026-10-17 23:07:57.676]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:57.677]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:57.678]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:57.678]: Info: Configuring selected display (1) to stream
+[2026-10-17 23:07:57.678]: Info: 
+[2026-10-17 23:07:57.678]: Info: // Ignore any errors mentioned above, they are not relevant. //
+[2026-10-17 23:07:57.678]: Info: 
+[2026-10-17 23:07:57.678]: Info: Found H.264 encoder: h264_videotoolbox [videotoolbox]
+[2026-10-17 23:07:57.678]: Info: Found HEVC encoder: hevc_videotoolbox [videotoolbox]
+[2026-10-17 23:07:57.678]: Info: Open the Web UI to set your new username and password and getting started
+[2026-10-17 23:07:57.678]: Info: Starting system tray
+[2026-10-17 23:07:57.678]: Info: File /Users/ergo/.config/sunshine/sunshine_state.json doesn't exist
+[2026-10-17 23:07:57.681]: Info: Configuration UI available at [https://localhost:47990]
+[2026-10-17 23:07:57.746]: Info: System tray created
+[2026-10-17 23:07:57.747]: Info: Starting main loop
+[2026-10-17 23:07:58.375]: Info: Successfully registered DNS service.
+[2026-10-17 23:08:47.235]: Info: Web UI: [127.0.0.1] -- not authorized
+[2026-10-17 23:16:27.293]: Info: Interrupt handler called
+[2026-10-17 23:16:27.302]: Info: Main loop has exited
+[2026-10-17 23:16:27.302]: Info: Deregistered DNS service.
